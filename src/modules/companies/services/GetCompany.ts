@@ -1,4 +1,5 @@
-import { Companies, Company } from '../main/Companies'
+import { Companies } from '../main/Companies'
+import { Company } from '../main/types'
 import { CompanyRepository } from '../repositories/CompanyRepository'
 
 export class GetCompany implements Companies {

@@ -1,5 +1,5 @@
-import { Company } from "../main/Companies";
+import { Company } from '../main/types'
 
 export interface CompanyRepository {
-    getAll(): Promise<Company[]>
+  getAll(): Promise<Company[]>
 }

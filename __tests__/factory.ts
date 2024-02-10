@@ -1,6 +1,5 @@
-import { Companies, Company } from '../src/modules/companies/main/Companies'
+import { Company } from '../src/modules/companies/main/types'
 import { CompanyRepository } from '../src/modules/companies/repositories/CompanyRepository'
-import { GetCompany } from '../src/modules/companies/services/GetCompany'
 
 export const companyData: Company = {
   id: 'my-id',

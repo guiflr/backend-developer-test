@@ -1,9 +1,4 @@
-export type Company = {
-  id: string
-  name: string
-  created_at: Date
-  updated_at: Date
-}
+import { Company } from "./types";
 
 export interface Companies {
   get(): Promise<Company[]>
