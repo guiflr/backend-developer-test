@@ -9,8 +9,7 @@ const config: Config = {
   clearMocks: true,
   coverageProvider: 'v8',
   testMatch: ['**/__tests__/**/*.spec.[jt]s?(x)'],
-  preset: 'ts-jest',
-  setupFilesAfterEnv: ['<rootDir>/__tests__/singleton.ts'],
+  preset: 'ts-jest',  
 };
 
 export default config;
