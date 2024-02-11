@@ -1,4 +1,4 @@
-export type Company = {
+export type CompanyDTO = {
   id: string
   name: string
   created_at: Date

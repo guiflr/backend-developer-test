@@ -1,7 +1,7 @@
-import { Company } from '../src/modules/companies/main/types'
+import { CompanyDTO } from '../src/modules/companies/main/types'
 import { CompanyRepository } from '../src/modules/companies/repositories/CompanyRepository'
 
-export const companyData: Company = {
+export const companyData: CompanyDTO = {
   id: 'my-id',
   name: 'company',
   created_at: new Date(),
@@ -9,7 +9,10 @@ export const companyData: Company = {
 }
 
 export class CompanyRepositoryTest implements CompanyRepository {
-  async getAll (): Promise<Company[]> {
+  async get(id: string): Promise<CompanyDTO> {
+    return companyData
+  }
+  async getAll (): Promise<CompanyDTO[]> {
     return [companyData]
   }
 }

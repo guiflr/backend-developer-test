@@ -1,5 +1,5 @@
-import { Company } from "./types";
+import { CompanyDTO } from "./types";
 
 export interface Companies {
-  get(): Promise<Company[]>
+  get(): Promise<CompanyDTO[]>
 }

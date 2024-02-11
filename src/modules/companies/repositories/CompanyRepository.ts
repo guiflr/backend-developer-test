@@ -1,5 +1,6 @@
-import { Company } from '../main/types'
+import { CompanyDTO } from '../main/types'
 
 export interface CompanyRepository {
-  getAll(): Promise<Company[]>
+  getAll(): Promise<CompanyDTO[]>
+  get(id: string): Promise<CompanyDTO>
 }

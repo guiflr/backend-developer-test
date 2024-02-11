@@ -1,17 +1,19 @@
-import { GetCompany } from "./modules/companies/services/GetCompanies"
-import { CompanyRepositoryTest, companyData } from "./factory"
+import { CompanyRepositoryTest } from './factory'
+import { GetCompany } from '../src/modules/companies/services/GetCompany'
 
-describe("GetCompany", () => {
-    const getCompany = new CompanyRepositoryTest()
-    const company = new GetCompany(getCompany)
-    
-    test("Should return companies", async () => {
-        const companies = await company.get()
+describe('GetCompany', () => {
+  const companyRepo = new CompanyRepositoryTest()
+  const getCompany = new GetCompany(companyRepo)
 
-        expect(Array.isArray(companies)).toBe(true)
+  test('Should return error when param is invalid', async () => {
+    const id = null as unknown as string
 
-        const [comp] = companies
+    const errorData = {
+      message: 'Invalid or missing param',
+      error: 'company "id" is invalid',
+      status: 400
+    }
 
-        expect(comp).toEqual(companyData)
-    })
+    await expect(() => getCompany.get(id)).rejects.toEqual(errorData)
+  })
 })

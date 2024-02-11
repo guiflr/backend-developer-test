@@ -1,5 +1,5 @@
-import { Company } from './types'
+import { CompanyDTO } from './types'
 
-export interface company {
-  get(id: number): Promise<Company>
+export interface Company {
+  get(id: string): Promise<CompanyDTO>
 }
