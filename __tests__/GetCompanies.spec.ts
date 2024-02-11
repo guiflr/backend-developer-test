@@ -5,6 +5,14 @@ describe('GetCompanies', () => {
   const getCompany = new CompanyRepositoryTest()
   const company = new GetCompanies(getCompany)
 
+  test('Should call company repository', async () => {
+    const spyCompanyRepo = jest.spyOn(getCompany, 'getAll')
+
+    await company.get()
+
+    expect(spyCompanyRepo).toHaveBeenCalled()
+  })
+
   test('Should return companies', async () => {
     const companies = await company.get()
 
