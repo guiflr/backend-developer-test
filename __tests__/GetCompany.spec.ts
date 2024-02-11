@@ -17,6 +17,16 @@ describe('GetCompany', () => {
     await expect(() => getCompany.get(id)).rejects.toEqual(errorData)
   })
 
+  test('Should call company repository', async () => {
+    const spyCompanyRepo = jest.spyOn(getCompany, 'get')
+
+    const id = 'my-id'
+
+    await getCompany.get(id)
+
+    expect(spyCompanyRepo).toHaveBeenCalledWith(id)
+  })
+
   test('Should return error when not found company', async () => {
     const id = 'id'
 
@@ -36,8 +46,8 @@ describe('GetCompany', () => {
   test('Should return company', async () => {
     const id = 'id'
 
-   const company = await getCompany.get(id)
+    const company = await getCompany.get(id)
 
-   expect(company).toEqual(companyData)
+    expect(company).toEqual(companyData)
   })
 })
