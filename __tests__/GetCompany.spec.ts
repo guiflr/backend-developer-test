@@ -16,4 +16,20 @@ describe('GetCompany', () => {
 
     await expect(() => getCompany.get(id)).rejects.toEqual(errorData)
   })
+
+  test('Should return error when not found company', async () => {
+    const id = 'id'
+
+    jest
+      .spyOn(companyRepo, 'get')
+      .mockImplementationOnce(async () => null as any)
+
+    const errorData = {
+      message: 'company not found',
+      error: '',
+      status: 404
+    }
+
+    await expect(() => getCompany.get(id)).rejects.toEqual(errorData)
+  })
 })
