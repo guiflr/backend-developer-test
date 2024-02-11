@@ -1,4 +1,4 @@
-import { CompanyRepositoryTest } from './factory'
+import { CompanyRepositoryTest, companyData } from './factory'
 import { GetCompany } from '../src/modules/companies/services/GetCompany'
 
 describe('GetCompany', () => {
@@ -31,5 +31,13 @@ describe('GetCompany', () => {
     }
 
     await expect(() => getCompany.get(id)).rejects.toEqual(errorData)
+  })
+
+  test('Should return company', async () => {
+    const id = 'id'
+
+   const company = await getCompany.get(id)
+
+   expect(company).toEqual(companyData)
   })
 })
