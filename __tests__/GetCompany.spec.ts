@@ -1,4 +1,4 @@
-import { GetCompany } from "../src/modules/companies/services/GetCompany"
+import { GetCompany } from "./modules/companies/services/GetCompanies"
 import { CompanyRepositoryTest, companyData } from "./factory"
 
 describe("GetCompany", () => {
