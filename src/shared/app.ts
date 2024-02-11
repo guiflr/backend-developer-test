@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { NextFunction, Request, Response, response } from 'express'
 import cors from 'cors'
 
 import { companyRoutes } from '../modules/companies/infra/http/routes/companyRoutes'

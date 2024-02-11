@@ -1,9 +1,9 @@
 import { Company } from '../../../main/types'
 import { CompanyRepository } from '../../../repositories/CompanyRepository'
-import knex from '../../../../../../knexfile'
+import db from '../../../../../config/database/knex/connection'
 
 export class KnexCompanyRepository implements CompanyRepository {
   async getAll (): Promise<Company[]> {
-    return await knex('companies')
+    return await db('companies')
   }
 }

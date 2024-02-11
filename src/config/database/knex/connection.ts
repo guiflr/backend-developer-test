@@ -1,14 +1,7 @@
-import type { Knex } from 'knex'
-import fs from 'node:fs'
-import path from 'node:path'
+import knex from 'knex'
 
-exports.up = async function (knex: Knex) {
-  return await knex.raw(
-    fs.readFileSync(path.join(__dirname, '../../../../ddl/models.sql'), 'utf8')
-  )
-}
+import config from '../../../../knexfile'
 
-exports.down = async function (knex: Knex) {
-  await knex.schema.dropTableIfExists('jobs')
-  return await knex.schema.dropSchemaIfExists('companies')
-}
+const db = knex(config.development);
+
+export default db

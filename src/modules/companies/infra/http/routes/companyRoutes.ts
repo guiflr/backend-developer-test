@@ -9,7 +9,7 @@ companyRoutes.get(
     try {
       const companies = await makeGetCompanies()
 
-      return response.send(companies)
+      return res.send(companies)
     } catch (err) {
       next(err)
     }

@@ -4,6 +4,8 @@
   "description": "## Welcome!",
   "main": "index.js",
   "scripts": {
+    "knex:migration": "npx knex migrate:latest",
+    "dev": "npm run knex:migration && npx serverless offline -s dev",
     "test": "jest"
   },
   "keywords": [],
@@ -15,6 +17,8 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.17",
     "jest": "^29.7.0",
+    "serverless-offline": "^13.3.3",
+    "serverless-plugin-typescript": "^2.1.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
