@@ -3,7 +3,7 @@ import type { Knex } from 'knex'
 // Update with your config settings.
 import 'dotenv/config'
 
-const config: { [key: string]: Knex.Config } = {
+const pg = require('knex')({
   development: {
     client: 'pg',
     connection: process.env.PG_CONNECTION_STRING,
@@ -12,6 +12,6 @@ const config: { [key: string]: Knex.Config } = {
       directory: './src/config/database/knex'
     }
   }
-}
+})
 
-module.exports = config
+export default pg
