@@ -1,12 +1,22 @@
 import { CreateJobService } from '../src/modules/jobs/services/CreateJobService'
-import { CompanyRepositoryTest, JobValidatorTest, jobData } from './factory'
+import {
+  CompanyRepositoryTest,
+  JobRepositoryTest,
+  JobValidatorTest,
+  jobData
+} from './factory'
 import { CompanyDTO } from '../src/modules/companies/main/types'
 
 describe('CreateJobService', () => {
   const jobValidator = new JobValidatorTest()
   const companyRepo = new CompanyRepositoryTest()
+  const jobRepository = new JobRepositoryTest()
 
-  const createJobService = new CreateJobService(jobValidator, companyRepo)
+  const createJobService = new CreateJobService(
+    jobValidator,
+    companyRepo,
+    jobRepository
+  )
 
   test('Should call job validator', async () => {
     const jobValidatorSpy = jest.spyOn(jobValidator, 'validate')
@@ -47,5 +57,13 @@ describe('CreateJobService', () => {
       error: '',
       status: 404
     })
+  })
+
+  test('Should call company repository with correct value', async () => {
+    const jobRepoSpy = jest.spyOn(jobRepository, 'store')
+
+    await createJobService.create(jobData)
+
+    expect(jobRepoSpy).toHaveBeenCalledWith(jobData)
   })
 })

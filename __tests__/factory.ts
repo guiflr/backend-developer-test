@@ -4,7 +4,8 @@ import {
   JobValidator,
   JobValidatorResponse
 } from '../src/modules/jobs/presentation/JobValidator'
-import { JobCreate } from './modules/jobs/domain/types'
+import { JobCreate, JobDTO } from './modules/jobs/domain/types'
+import { JobRepository } from './modules/jobs/repositories/JobRepository'
 
 export const companyData: CompanyDTO = {
   id: 'my-id',
@@ -33,5 +34,11 @@ export const jobData: JobCreate = {
 export class JobValidatorTest implements JobValidator {
   validate (job: JobCreate): JobValidatorResponse {
     return { isValid: true, error: '' }
+  }
+}
+
+export class JobRepositoryTest implements JobRepository {
+  async store (job: JobCreate): Promise<JobDTO> {
+    return { id: 'id', ...jobData }
   }
 }
