@@ -9,24 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetCompany = void 0;
-const invalidRequest_1 = require("../../../shared/errors/invalidRequest");
-const notFound_1 = require("../../../shared/errors/notFound");
-class GetCompany {
+exports.GetCompanies = void 0;
+class GetCompanies {
     constructor(companyRepository) {
         this.companyRepository = companyRepository;
     }
-    get(id) {
+    get() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!id) {
-                throw (0, invalidRequest_1.invalidRequest)('company "id" is invalid');
-            }
-            const company = yield this.companyRepository.get(id);
-            if (!company) {
-                throw (0, notFound_1.notFound)('company not found');
-            }
-            return company;
+            const companies = yield this.companyRepository.getAll();
+            return companies;
         });
     }
 }
-exports.GetCompany = GetCompany;
+exports.GetCompanies = GetCompanies;

@@ -17,6 +17,11 @@ exports.companyData = {
     updated_at: new Date()
 };
 class CompanyRepositoryTest {
+    get(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return exports.companyData;
+        });
+    }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
             return [exports.companyData];

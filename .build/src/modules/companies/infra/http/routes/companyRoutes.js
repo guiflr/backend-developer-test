@@ -12,12 +12,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.companyRoutes = void 0;
 const express_1 = require("express");
 const makeGetCompanies_1 = require("../../../factory/makeGetCompanies");
+const makeGetCompany_1 = require("../../../factory/makeGetCompany");
 const companyRoutes = (0, express_1.Router)();
 exports.companyRoutes = companyRoutes;
 companyRoutes.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const companies = yield (0, makeGetCompanies_1.makeGetCompanies)();
         return res.send(companies);
+    }
+    catch (err) {
+        next(err);
+    }
+}));
+companyRoutes.get('/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const company = yield (0, makeGetCompany_1.makeGetCompany)(req.params.id);
+        return res.send(company);
     }
     catch (err) {
         next(err);

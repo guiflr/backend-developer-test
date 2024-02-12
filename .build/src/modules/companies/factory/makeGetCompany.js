@@ -9,24 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetCompany = void 0;
-const invalidRequest_1 = require("../../../shared/errors/invalidRequest");
-const notFound_1 = require("../../../shared/errors/notFound");
-class GetCompany {
-    constructor(companyRepository) {
-        this.companyRepository = companyRepository;
-    }
-    get(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!id) {
-                throw (0, invalidRequest_1.invalidRequest)('company "id" is invalid');
-            }
-            const company = yield this.companyRepository.get(id);
-            if (!company) {
-                throw (0, notFound_1.notFound)('company not found');
-            }
-            return company;
-        });
-    }
+exports.makeGetCompany = void 0;
+const KnexCompanyRepository_1 = require("../infra/database/knex/KnexCompanyRepository");
+const GetCompany_1 = require("../services/GetCompany");
+function makeGetCompany(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const companyRepository = new KnexCompanyRepository_1.KnexCompanyRepository();
+        const getCompany = new GetCompany_1.GetCompany(companyRepository);
+        return yield getCompany.get(id);
+    });
 }
-exports.GetCompany = GetCompany;
+exports.makeGetCompany = makeGetCompany;

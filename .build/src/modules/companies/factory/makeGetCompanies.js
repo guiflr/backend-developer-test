@@ -11,11 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.makeGetCompanies = void 0;
 const KnexCompanyRepository_1 = require("../infra/database/knex/KnexCompanyRepository");
-const GetCompany_1 = require("../services/GetCompany");
+const GetCompanies_1 = require("../services/GetCompanies");
 function makeGetCompanies() {
     return __awaiter(this, void 0, void 0, function* () {
         const companyRepo = new KnexCompanyRepository_1.KnexCompanyRepository();
-        const getCompany = new GetCompany_1.GetCompany(companyRepo);
+        const getCompany = new GetCompanies_1.GetCompanies(companyRepo);
         return yield getCompany.get();
     });
 }

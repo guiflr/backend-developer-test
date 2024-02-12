@@ -15,6 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.KnexCompanyRepository = void 0;
 const connection_1 = __importDefault(require("../../../../../config/database/knex/connection"));
 class KnexCompanyRepository {
+    get(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const company = yield (0, connection_1.default)('companies').where({ id }).first();
+            return company;
+        });
+    }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
             return yield (0, connection_1.default)('companies');
