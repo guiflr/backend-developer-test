@@ -28,6 +28,6 @@ export class CreateJobService implements CreateJob {
 
     const jobData = await this.jobRepository.store(job)
 
-    return '' as any
+    return jobData
   }
 }

@@ -66,4 +66,10 @@ describe('CreateJobService', () => {
 
     expect(jobRepoSpy).toHaveBeenCalledWith(jobData)
   })
+
+  test('Should return created data', async () => {
+    const job = await createJobService.create(jobData)
+
+    expect(job).toEqual({ ...jobData, id: 'id' })
+  })
 })
