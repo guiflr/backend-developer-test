@@ -1,6 +1,9 @@
 import { CompanyDTO } from '../src/modules/companies/main/types'
 import { CompanyRepository } from '../src/modules/companies/repositories/CompanyRepository'
-import { JobValidator, JobValidatorResponse } from '../src/modules/jobs/presentation/JobValidator'
+import {
+  JobValidator,
+  JobValidatorResponse
+} from '../src/modules/jobs/presentation/JobValidator'
 import { JobCreate } from './modules/jobs/domain/types'
 
 export const companyData: CompanyDTO = {
@@ -11,7 +14,7 @@ export const companyData: CompanyDTO = {
 }
 
 export class CompanyRepositoryTest implements CompanyRepository {
-  async get(id: string): Promise<CompanyDTO> {
+  async get (id: string): Promise<CompanyDTO> {
     return companyData
   }
   async getAll (): Promise<CompanyDTO[]> {
@@ -27,10 +30,8 @@ export const jobData: JobCreate = {
   title: 'title'
 }
 
-
 export class JobValidatorTest implements JobValidator {
-  validate(job: JobCreate): JobValidatorResponse {
+  validate (job: JobCreate): JobValidatorResponse {
     return { isValid: true, error: '' }
   }
-
 }
