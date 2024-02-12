@@ -5,6 +5,7 @@ import {
   JobValidatorResponse
 } from '../src/modules/jobs/presentation/JobValidator'
 import { JobCreate, JobDTO } from './modules/jobs/domain/types'
+import { JobQueue } from './modules/jobs/repositories/JobQueue'
 import { JobRepository } from './modules/jobs/repositories/JobRepository'
 
 export const companyData: CompanyDTO = {
@@ -24,7 +25,7 @@ export class CompanyRepositoryTest implements CompanyRepository {
 }
 
 export const jobData: JobCreate = {
-  company_id: 'company_id',
+  company_id: '1f400d2d-211f-4281-a17b-48bf5bd72d9a',
   description: 'my-job',
   location: 'CWB',
   status: 'draft',
@@ -41,4 +42,8 @@ export class JobRepositoryTest implements JobRepository {
   async store (job: JobCreate): Promise<JobDTO> {
     return { id: 'id', ...jobData }
   }
+}
+
+export class JobQueueTest implements JobQueue {
+  async store (job: JobCreate): Promise<void> {}
 }

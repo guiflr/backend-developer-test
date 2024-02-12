@@ -4,7 +4,7 @@ import { JobCreate } from '../domain/types'
 import { KnexJobRepository } from '../infra/database/KnexJobRepository'
 import { CreateJobService } from '../services/CreateJobService'
 
-export function makeCreateJob (job: JobCreate) {
+export async function makeCreateJob (job: JobCreate) {
   const validator = new ZodJobValidator()
   const companyRepository = new KnexCompanyRepository()
   const jobRepository = new KnexJobRepository()
@@ -15,5 +15,5 @@ export function makeCreateJob (job: JobCreate) {
     jobRepository
   )
 
-  return createJobService.create(job)
+  return await createJobService.create(job)
 }

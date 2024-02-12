@@ -4,16 +4,17 @@ import { CompanyRepository } from '../../companies/repositories/CompanyRepositor
 import { CreateJob } from '../domain/CreateJob'
 import { JobCreate, JobDTO } from '../domain/types'
 import { JobValidator } from '../presentation/JobValidator'
+import { JobQueue } from '../repositories/JobQueue'
 import { JobRepository } from '../repositories/JobRepository'
 
 export class CreateJobService implements CreateJob {
   constructor (
     private jobValidator: JobValidator,
     private companyRepository: CompanyRepository,
-    private jobRepository: JobRepository
+    private jobQueue: JobQueue
   ) {}
 
-  async create (job: JobCreate): Promise<JobDTO> {
+  async create (job: JobCreate): Promise<void> {
     const validate = this.jobValidator.validate(job)
 
     if (!validate.isValid) {
@@ -26,8 +27,6 @@ export class CreateJobService implements CreateJob {
       throw notFound('company not found')
     }
 
-    const jobData = await this.jobRepository.store(job)
-
-    return jobData
+    await this.jobQueue.store(job)
   }
 }

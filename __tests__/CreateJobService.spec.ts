@@ -1,6 +1,7 @@
 import { CreateJobService } from '../src/modules/jobs/services/CreateJobService'
 import {
   CompanyRepositoryTest,
+  JobQueueTest,
   JobRepositoryTest,
   JobValidatorTest,
   jobData
@@ -10,12 +11,12 @@ import { CompanyDTO } from '../src/modules/companies/main/types'
 describe('CreateJobService', () => {
   const jobValidator = new JobValidatorTest()
   const companyRepo = new CompanyRepositoryTest()
-  const jobRepository = new JobRepositoryTest()
+  const jobQueue = new JobQueueTest()
 
   const createJobService = new CreateJobService(
     jobValidator,
     companyRepo,
-    jobRepository
+    jobQueue
   )
 
   test('Should call job validator', async () => {
@@ -59,17 +60,12 @@ describe('CreateJobService', () => {
     })
   })
 
-  test('Should call company repository with correct value', async () => {
-    const jobRepoSpy = jest.spyOn(jobRepository, 'store')
+  test('Should call job queue with correct value', async () => {
+    const jobRepoSpy = jest.spyOn(jobQueue, 'store')
 
     await createJobService.create(jobData)
 
     expect(jobRepoSpy).toHaveBeenCalledWith(jobData)
   })
 
-  test('Should return created data', async () => {
-    const job = await createJobService.create(jobData)
-
-    expect(job).toEqual({ ...jobData, id: 'id' })
-  })
 })
