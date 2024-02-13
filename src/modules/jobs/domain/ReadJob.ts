@@ -1,5 +1,5 @@
-import { JobDTO } from './types'
+import { JobCreate, JobDTO } from './types'
 
 export interface ReadJob {
-  read(jobData: JobDTO): Promise<void>
+  read(jobData: JobCreate): Promise<void>
 }
