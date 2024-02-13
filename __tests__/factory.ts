@@ -5,6 +5,7 @@ import {
   JobValidatorResponse
 } from '../src/modules/jobs/presentation/JobValidator'
 import { JobCreate, JobDTO } from './modules/jobs/domain/types'
+import { JobModerateResponse, JobModerator } from './modules/jobs/presentation/JobModerator'
 import { JobQueue } from './modules/jobs/repositories/JobQueue'
 import { JobRepository } from './modules/jobs/repositories/JobRepository'
 
@@ -47,3 +48,9 @@ export class JobRepositoryTest implements JobRepository {
 export class JobQueueTest implements JobQueue {
   async store (job: JobCreate): Promise<void> {}
 }
+
+export class JobModeratorTest implements JobModerator{
+  async moderate(content: string): Promise<JobModerateResponse> {
+    return { isHarmful: false }
+  }
+} 
