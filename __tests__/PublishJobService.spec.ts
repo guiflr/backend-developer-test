@@ -1,5 +1,6 @@
 import { PublishJobService } from '../src/modules/jobs/services/PublishJobService'
 import { JobQueueTest, JobRepositoryTest, jobData } from './factory'
+import { notFound } from '../src/shared/errors/notFound'
 
 describe('PublishJobService', () => {
   const jobRepo = new JobRepositoryTest()
@@ -21,5 +22,13 @@ describe('PublishJobService', () => {
     await publiJob.publish('id')
 
     expect(jobQueueSpy).toHaveBeenCalledWith({ id: 'id', ...jobData })
+  })
+
+  test('Should throws an error when job not founded job queue with correct values', async () => {
+    jest.spyOn(jobRepo, 'get').mockResolvedValueOnce(null as any)
+
+    const jobQueueSpy = jest.spyOn(jobQueue, 'store')
+
+    await expect(() => publiJob.publish('id')).rejects.toEqual(notFound("job not founded"))
   })
 })
