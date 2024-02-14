@@ -7,6 +7,7 @@ describe('CreateJobHttp', () => {
   afterAll(async () => {
     await db.destroy()
   })
+  
   test('Should create job', async () => {
     const response = await supertest(app).post('/jobs').send(jobData)
 
