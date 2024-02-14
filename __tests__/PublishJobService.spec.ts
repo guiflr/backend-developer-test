@@ -1,12 +1,21 @@
 import { PublishJobService } from '../src/modules/jobs/services/PublishJobService'
-import { JobQueueTest, JobRepositoryTest, jobData } from './factory'
+import { JobQueueTest, JobRepositoryTest, UUIDValidatorTest, jobData } from './factory'
 import { notFound } from '../src/shared/errors/notFound'
 
 describe('PublishJobService', () => {
   const jobRepo = new JobRepositoryTest()
   const jobQueue = new JobQueueTest()
+  const UUIDValidator = new UUIDValidatorTest()
 
-  const publiJob = new PublishJobService(jobRepo, jobQueue)
+  const publiJob = new PublishJobService(UUIDValidator, jobRepo, jobQueue)
+
+  test('Should call uuid validator', async () => {
+    const UUIDValidatorSpy = jest.spyOn(UUIDValidator, 'validate')
+
+    await publiJob.publish('id')
+
+    expect(UUIDValidatorSpy).toHaveBeenCalledWith('id')
+  })
 
   test('Should call job repository', async () => {
     const jobRepoSpy = jest.spyOn(jobRepo, 'get')
