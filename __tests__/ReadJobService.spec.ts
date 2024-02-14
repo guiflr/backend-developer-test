@@ -24,20 +24,20 @@ describe('ReadJobService', () => {
     const note = 'fail'
     jest.spyOn(jobModerator, 'moderate').mockResolvedValueOnce({ isHarmful: true, note  })
 
-    const jobRepoSpy = jest.spyOn(jobRepository, 'store')
+    const jobRepoSpy = jest.spyOn(jobRepository, 'updateStatus')
 
     await readJobService.read({ ...jobData, id})
 
-    expect(jobRepoSpy).toHaveBeenCalledWith({...jobData, status: 'rejected', notes: note, id})
+    expect(jobRepoSpy).toHaveBeenCalledWith('rejected', id)
   })
 
   test('Should call JobRepository with correct values when moderate return false', async () => {
     jest.spyOn(jobModerator, 'moderate').mockResolvedValueOnce({ isHarmful: false  })
 
-    const jobRepoSpy = jest.spyOn(jobRepository, 'store')
+    const jobRepoSpy = jest.spyOn(jobRepository, 'updateStatus')
 
     await readJobService.read({ ...jobData, id })
 
-    expect(jobRepoSpy).toHaveBeenCalledWith({...jobData, status: 'published', id})
+    expect(jobRepoSpy).toHaveBeenCalledWith('published', id)
   })
 })

@@ -17,6 +17,6 @@ export class ReadJobService implements ReadJob {
 
     jobData.status = moderate.isHarmful ? 'rejected' : 'published'
 
-    await this.jobRepository.store(jobData)
+    await this.jobRepository.updateStatus(jobData.status, jobData.id)
   }
 }
