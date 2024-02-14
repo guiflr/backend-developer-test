@@ -7,10 +7,12 @@ describe('ReadJobService', () => {
 
   const readJobService = new ReadJobService(jobModerator, jobRepository)
 
+  const id = 'my-id'
+
   test('Should call JobModerator with correct values', async () => {
     const jobModeratorSpy = jest.spyOn(jobModerator, 'moderate')
 
-    await readJobService.read({ ...jobData })
+    await readJobService.read({ ...jobData, id })
 
     expect(jobModeratorSpy).toHaveBeenCalledWith(
       jobData.title,
@@ -24,9 +26,9 @@ describe('ReadJobService', () => {
 
     const jobRepoSpy = jest.spyOn(jobRepository, 'store')
 
-    await readJobService.read({ ...jobData })
+    await readJobService.read({ ...jobData, id})
 
-    expect(jobRepoSpy).toHaveBeenCalledWith({...jobData, status: 'rejected', notes: note})
+    expect(jobRepoSpy).toHaveBeenCalledWith({...jobData, status: 'rejected', notes: note, id})
   })
 
   test('Should call JobRepository with correct values when moderate return false', async () => {
@@ -34,8 +36,8 @@ describe('ReadJobService', () => {
 
     const jobRepoSpy = jest.spyOn(jobRepository, 'store')
 
-    await readJobService.read({ ...jobData })
+    await readJobService.read({ ...jobData, id })
 
-    expect(jobRepoSpy).toHaveBeenCalledWith({...jobData, status: 'published'})
+    expect(jobRepoSpy).toHaveBeenCalledWith({...jobData, status: 'published', id})
   })
 })

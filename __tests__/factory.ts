@@ -13,7 +13,7 @@ import {
   UUIDValidator
 } from './modules/jobs/presentation/UUIDValidator'
 import { JobQueue } from './modules/jobs/repositories/JobQueue'
-import { JobRepository } from './modules/jobs/repositories/JobRepository'
+import { JobRepository, Status } from './modules/jobs/repositories/JobRepository'
 
 export const companyData: CompanyDTO = {
   id: 'my-id',
@@ -46,6 +46,9 @@ export class JobValidatorTest implements JobValidator {
 }
 
 export class JobRepositoryTest implements JobRepository {
+  updateStatus(status: Status): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
   async get (id: string): Promise<JobDTO> {
     return { id: 'id', ...jobData }
   }
