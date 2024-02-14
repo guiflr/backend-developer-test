@@ -20,6 +20,10 @@ export class CreateJobService implements CreateJob {
       throw invalidRequest(validate.error)
     }
 
+    if(job.status !== 'draft'){
+      throw invalidRequest("status value should be draft")
+    }
+
     const company = await this.companyRepository.get(job.company_id)
 
     if (!company) {

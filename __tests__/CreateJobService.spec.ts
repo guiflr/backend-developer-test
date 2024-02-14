@@ -69,4 +69,13 @@ describe('CreateJobService', () => {
     expect(jobRepoSpy).toHaveBeenCalledWith(jobData)
   })
 
+  test('Should call job repository with correct value', async () => {
+    await expect(() =>
+      createJobService.create({ ...jobData, status: 'published' })
+    ).rejects.toEqual({
+      message: 'Invalid or missing param',
+      error: 'status value should be draft',
+      status: 400
+    })
+  })
 })
