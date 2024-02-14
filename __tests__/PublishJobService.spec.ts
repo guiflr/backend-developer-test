@@ -27,8 +27,6 @@ describe('PublishJobService', () => {
   test('Should throws an error when job not founded job queue with correct values', async () => {
     jest.spyOn(jobRepo, 'get').mockResolvedValueOnce(null as any)
 
-    const jobQueueSpy = jest.spyOn(jobQueue, 'store')
-
     await expect(() => publiJob.publish('id')).rejects.toEqual(notFound("job not founded"))
   })
 })
