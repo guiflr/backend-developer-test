@@ -26,7 +26,7 @@ export class CompanyRepositoryTest implements CompanyRepository {
 }
 
 export const jobData: JobCreate = {
-  company_id: '1f400d2d-211f-4281-a17b-48bf5bd72d9a',
+  company_id: 'e8d05ced-93b9-40a6-a1ca-423b2752a565',
   description: 'my-job',
   location: 'CWB',
   status: 'draft',
@@ -40,6 +40,9 @@ export class JobValidatorTest implements JobValidator {
 }
 
 export class JobRepositoryTest implements JobRepository {
+  async get(id: string): Promise<JobDTO> {
+    return { id: 'id', ...jobData }
+  }
   async store (job: JobCreate): Promise<JobDTO> {
     return { id: 'id', ...jobData }
   }

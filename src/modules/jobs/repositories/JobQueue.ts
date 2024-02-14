@@ -1,5 +1,5 @@
-import { JobCreate } from '../domain/types'
+import { JobDTO } from '../domain/types'
 
 export interface JobQueue {
-  store(job: JobCreate): Promise<void>
+  store(job: JobDTO): Promise<void>
 }
