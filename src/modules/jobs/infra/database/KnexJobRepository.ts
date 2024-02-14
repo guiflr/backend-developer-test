@@ -5,7 +5,7 @@ import { JobRepository, Status } from '../../repositories/JobRepository'
 export class KnexJobRepository implements JobRepository {
   constructor (private knex: Knex) {}
   async updateStatus(status: Status, id: string): Promise<void> {
-    await this.knex('jobs').where({ id }).update({ status })
+    await this.knex('jobs').where({ id }).update({ status, updated_at: new Date() })
   }
   
   async get (id: string): Promise<JobDTO> {
