@@ -29,4 +29,11 @@ describe('UpdateJobData', () => {
     expect(uuidValidatorSpy).toHaveBeenCalledWith('id')
   })
 
+  test('Should throw an error if update data is invalid', async () => {
+    const error = 'fail'
+    jest.spyOn(uuidValidator, 'validate').mockReturnValueOnce({ error, isValid: false })
+
+    await expect(() => updateJob.update(updateJobData, 'id')).rejects.toEqual(invalidRequest('invalid job id'))
+  })
+
 })

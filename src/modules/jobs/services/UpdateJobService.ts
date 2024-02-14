@@ -15,6 +15,8 @@ export class UpdateJobService implements UpdateJob {
 
     const uuidValidation = this.uuidValidation.validate(id)
 
-    
+    if(!uuidValidation.isValid){
+      throw invalidRequest('invalid job id')
+    }
   }
 }
