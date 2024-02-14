@@ -1,11 +1,11 @@
 import { ReadJob } from '../domain/ReadJob'
-import { JobCreate, JobDTO } from '../domain/types'
+import { JobDTO } from '../domain/types'
 import { JobModerator } from '../presentation/JobModerator'
 import { JobRepository } from '../repositories/JobRepository'
 
 export class ReadJobService implements ReadJob {
   constructor (private jobModerator: JobModerator, private jobRepository: JobRepository) {}
-  async read (jobData: JobCreate): Promise<void> {
+  async read (jobData: JobDTO): Promise<void> {
     const moderate = await this.jobModerator.moderate(
       jobData.title,
       jobData.description
