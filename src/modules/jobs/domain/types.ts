@@ -16,3 +16,9 @@ export interface JobDTO extends JobCreate {
 export interface JobCompany extends JobDTO {
   company: CompanyDTO
 }
+
+export type UpdateJobData = {
+  title: string
+  description: string
+  location: string
+}

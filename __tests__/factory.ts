@@ -1,15 +1,16 @@
 import { CompanyDTO } from '../src/modules/companies/main/types'
 import { CompanyRepository } from '../src/modules/companies/repositories/CompanyRepository'
-import {
-  JobValidator,
-  JobValidatorResponse
-} from '../src/modules/jobs/presentation/JobValidator'
-import { JobCreate, JobDTO } from './modules/jobs/domain/types'
+import { JobValidator } from '../src/modules/jobs/presentation/JobValidator'
+import { JobCreate, JobDTO, UpdateJobData } from './modules/jobs/domain/types'
 import {
   JobModerateResponse,
   JobModerator
 } from './modules/jobs/presentation/JobModerator'
 import { UUIDValidator } from './modules/jobs/presentation/UUIDValidator'
+import {
+  JobValidatorResponse,
+  UpdateJobValidator
+} from './modules/jobs/presentation/UpdateJobValidator'
 import { JobQueue } from './modules/jobs/repositories/JobQueue'
 import {
   JobRepository,
@@ -21,6 +22,12 @@ export const companyData: CompanyDTO = {
   name: 'company',
   created_at: new Date(),
   updated_at: new Date()
+}
+
+export const updateJobData: UpdateJobData = {
+  description: 'description',
+  location: 'Colombo',
+  title: 'title'
 }
 
 export class CompanyRepositoryTest implements CompanyRepository {
@@ -69,5 +76,11 @@ export class JobModeratorTest implements JobModerator {
 export class UUIDValidatorTest implements UUIDValidator {
   validate (id: string): JobValidatorResponse {
     return { error: 'id error', isValid: true }
+  }
+}
+
+export class UpdateJobValidatorTest implements UpdateJobValidator {
+  validator (data: UpdateJobData): JobValidatorResponse {
+    return { error: null, isValid: true }
   }
 }
