@@ -1,18 +1,13 @@
 import { SQSEvent, Context, Callback } from 'aws-lambda'
 import { makeReadJobFunction } from './modules/jobs/factory/makeReadJobMessage'
+import db from './config/database/knex/connection'
 
 export const handler = async (
   event: SQSEvent,
   context: Context,
   callback: Callback
 ) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Job saved on queue',
-      input: event
-    })
-  }
+  context.callbackWaitsForEmptyEventLoop = false
 
   console.log('event: ', JSON.stringify(event))
 
@@ -22,7 +17,15 @@ export const handler = async (
   
   console.log('text: ', data)
 
-  await makeReadJobFunction(data)
+  await makeReadJobFunction(data, db)
+
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Job saved on queue',
+      input: event
+    })
+  }
 
   callback(null, response)
 }

@@ -1,10 +1,11 @@
-import db from '../../../../config/database/knex/connection'
+import { Knex } from 'knex'
 import { JobCreate, JobDTO } from '../../domain/types'
 import { JobRepository } from '../../repositories/JobRepository'
 
 export class KnexJobRepository implements JobRepository {
+  constructor(private knex: Knex){}
   async store (job: JobCreate): Promise<JobDTO> {
-    const jobCreated = await db('jobs').insert(job).returning(['*'])
+    const jobCreated = await this.knex('jobs').insert(job).returning(['*'])
 
     if (Array.isArray(jobCreated)) {
       return jobCreated[0]

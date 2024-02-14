@@ -12,7 +12,8 @@ const config: KnexConfig = {
     searchPath: ['knex', 'public'],
     migrations: {
       directory: './src/config/database/knex/migrations'
-    }
+    },
+    pool: { min: 1, max: 10 }
   }
 }
 
