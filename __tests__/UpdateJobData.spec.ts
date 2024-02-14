@@ -1,11 +1,12 @@
 import { UpdateJobService } from '../src/modules/jobs/services/UpdateJobService'
-import { UpdateJobValidatorTest, updateJobData } from './factory'
+import { UUIDValidatorTest, UpdateJobValidatorTest, updateJobData } from './factory'
 import { invalidRequest } from '../src/shared/errors/invalidRequest'
 
 describe('UpdateJobData', () => {
   const updateValidator = new UpdateJobValidatorTest()
+  const uuidValidator = new UUIDValidatorTest()
 
-  const updateJob = new UpdateJobService(updateValidator)
+  const updateJob = new UpdateJobService(updateValidator, uuidValidator)
 
   test('Should call update job validator', async () => {
     const updateValidatorSpy = jest.spyOn(updateValidator, 'validator')
@@ -20,4 +21,12 @@ describe('UpdateJobData', () => {
 
     await expect(() => updateJob.update(updateJobData, 'id')).rejects.toEqual(invalidRequest(error))
   })
+
+  test('Should call update job validator', async () => {
+    const uuidValidatorSpy = jest.spyOn(uuidValidator, 'validate')
+
+    await updateJob.update(updateJobData, 'id')
+    expect(uuidValidatorSpy).toHaveBeenCalledWith('id')
+  })
+
 })
