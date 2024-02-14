@@ -21,4 +21,18 @@ describe('PublishJob', () => {
       status: 400
     })
   })
+
+  test('Should retturn 400 if job is not founded', async () => {
+    const id = '281c220f-3d36-4c11-a2f2-d6255d0d225j'
+    const response = await supertest(app)
+      .put(`/jobs/${id}/publish`)
+      .send(jobData)
+
+    expect(response.status).toEqual(400)
+    expect(response.body).toEqual({
+      message: 'Invalid or missing param',
+      error: 'invalid job ID',
+      status: 400
+    })
+  })
 })
