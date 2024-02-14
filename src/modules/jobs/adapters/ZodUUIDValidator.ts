@@ -1,11 +1,10 @@
 import { getZodErrors } from '../../../shared/getZodErrors'
-import { JobCreate } from '../domain/types'
-import { JobValidatorSchema } from '../helpers/JobValidatorSchema'
+import { UUIDValidatorSchema } from '../helpers/UUIDValidator'
 import { JobValidatorResponse, UUIDValidator } from '../presentation/UUIDValidator'
 
 export class ZodUUIDValidator implements UUIDValidator {
   validate (id: string): JobValidatorResponse {
-    const validation = JobValidatorSchema.safeParse(id)
+    const validation = UUIDValidatorSchema.safeParse(id)
 
     if (validation.success) {
       return { error: '', isValid: true }
