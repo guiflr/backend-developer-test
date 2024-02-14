@@ -12,11 +12,12 @@ describe('CreateJobService', () => {
   const jobValidator = new JobValidatorTest()
   const companyRepo = new CompanyRepositoryTest()
   const jobQueue = new JobQueueTest()
+  const jobRepository = new JobRepositoryTest()
 
   const createJobService = new CreateJobService(
     jobValidator,
     companyRepo,
-    jobQueue
+    jobRepository
   )
 
   test('Should call job validator', async () => {
@@ -60,8 +61,8 @@ describe('CreateJobService', () => {
     })
   })
 
-  test('Should call job queue with correct value', async () => {
-    const jobRepoSpy = jest.spyOn(jobQueue, 'store')
+  test('Should call job repository with correct value', async () => {
+    const jobRepoSpy = jest.spyOn(jobRepository, 'store')
 
     await createJobService.create(jobData)
 
