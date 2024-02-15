@@ -1,12 +1,13 @@
 import { UpdateJobService } from '../src/modules/jobs/services/UpdateJobService'
-import { UUIDValidatorTest, UpdateJobValidatorTest, updateJobData } from './factory'
+import { JobRepositoryTest, UUIDValidatorTest, UpdateJobValidatorTest, updateJobData } from './factory'
 import { invalidRequest } from '../src/shared/errors/invalidRequest'
 
 describe('UpdateJobData', () => {
   const updateValidator = new UpdateJobValidatorTest()
   const uuidValidator = new UUIDValidatorTest()
+  const jobRepository = new JobRepositoryTest()
 
-  const updateJob = new UpdateJobService(updateValidator, uuidValidator)
+  const updateJob = new UpdateJobService(updateValidator, uuidValidator, jobRepository)
 
   test('Should call update job validator', async () => {
     const updateValidatorSpy = jest.spyOn(updateValidator, 'validator')
@@ -34,6 +35,13 @@ describe('UpdateJobData', () => {
     jest.spyOn(uuidValidator, 'validate').mockReturnValueOnce({ error, isValid: false })
 
     await expect(() => updateJob.update(updateJobData, 'id')).rejects.toEqual(invalidRequest('invalid job id'))
+  })
+
+  test('Should call job repository with correct values', async () => {
+    const jobRepoSpy = jest.spyOn(jobRepository, 'update')
+
+    await updateJob.update(updateJobData, 'id')
+    expect(jobRepoSpy).toHaveBeenCalledWith(updateJobData, 'id')
   })
 
 })
