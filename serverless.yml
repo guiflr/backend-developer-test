@@ -28,6 +28,10 @@ functions:
     events:
       - sqs:
           arn: 'arn:aws:sqs:us-east-1:734331760085:create-job'
+  timer:
+    handler: src/readPublishedJob.handler
+    events:
+      - schedule: rate(1 minute)      
 
 plugins:
   - serverless-plugin-typescript
