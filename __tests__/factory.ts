@@ -11,11 +11,14 @@ import {
   JobValidatorResponse,
   UpdateJobValidator
 } from './modules/jobs/presentation/UpdateJobValidator'
+import { CacheRepository } from './modules/feed/repositories/CacheRepository'
 import { JobQueue } from './modules/jobs/repositories/JobQueue'
 import {
   JobRepository,
   Status
 } from './modules/jobs/repositories/JobRepository'
+import { FeedRepository } from './modules/feed/repositories/FeedRepository'
+import { FeedData } from './modules/feed/domain/types'
 
 export const companyData: CompanyDTO = {
   id: 'my-id',
@@ -53,6 +56,14 @@ export class JobValidatorTest implements JobValidator {
   }
 }
 
+export const feedData: FeedData = {
+  company: 'Company',
+  created_at: new Date(),
+  description: 'description',
+  id: 'my-id',
+  title: 'title'
+}
+
 export class JobRepositoryTest implements JobRepository {
   async delete (id: string): Promise<void> {}
   async update (data: UpdateJobData, id: string): Promise<void> {}
@@ -84,5 +95,15 @@ export class UUIDValidatorTest implements UUIDValidator {
 export class UpdateJobValidatorTest implements UpdateJobValidator {
   validator (data: UpdateJobData): JobValidatorResponse {
     return { error: null, isValid: true }
+  }
+}
+
+export class CacheRepositoryTest implements CacheRepository {
+  async update (data: FeedData): Promise<void> {}
+}
+
+export class FeedRepositoryTest implements FeedRepository {
+  async getByStatus (status: Status): Promise<FeedData> {
+    return feedData
   }
 }

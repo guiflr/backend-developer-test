@@ -4,6 +4,7 @@ import { JobRepository, Status } from '../../repositories/JobRepository'
 
 export class KnexJobRepository implements JobRepository {
   constructor (private knex: Knex) {}
+
   async delete (id: string): Promise<void> {
     await this.knex('jobs').where({ id }).delete()
   }
