@@ -1,5 +1,5 @@
 import { DeleteJobService } from '../src/modules/jobs/services/DeleteJobService'
-import { JobRepositoryTest, UUIDValidatorTest, UpdateJobValidatorTest, updateJobData } from './factory'
+import { JobRepositoryTest, UUIDValidatorTest } from './factory'
 import { invalidRequest } from '../src/shared/errors/invalidRequest'
 
 describe('DeleteJobService', () => {

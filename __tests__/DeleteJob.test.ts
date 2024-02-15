@@ -1,6 +1,5 @@
 import supertest from 'supertest'
 import { app } from '../src/shared/app'
-import { jobData } from './factory'
 import db from '../src/config/database/knex/connection'
 
 describe('UpdateJobHttp', () => {
