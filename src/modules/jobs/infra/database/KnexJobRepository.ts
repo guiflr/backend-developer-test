@@ -4,6 +4,9 @@ import { JobRepository, Status } from '../../repositories/JobRepository'
 
 export class KnexJobRepository implements JobRepository {
   constructor (private knex: Knex) {}
+  delete(id: string): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
  async update({description, location, title}: UpdateJobData, id: string): Promise<void> {
     await this.knex('jobs').where({ id }).update({ description, location, title, updated_at: new Date() })
   }

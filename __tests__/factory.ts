@@ -54,6 +54,7 @@ export class JobValidatorTest implements JobValidator {
 }
 
 export class JobRepositoryTest implements JobRepository {
+  async delete (id: string): Promise<void> {}
   async update (data: UpdateJobData, id: string): Promise<void> {}
   async updateStatus (status: Status): Promise<void> {}
   async get (id: string): Promise<JobDTO> {

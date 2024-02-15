@@ -7,4 +7,5 @@ export interface JobRepository {
   get(id: string): Promise<JobDTO>
   updateStatus(status: Status, id: string): Promise<void>
   update(data: UpdateJobData, id: string): Promise<void>
+  delete(id: string): Promise<void>
 }
