@@ -3,6 +3,7 @@ import { makeCreateJob } from '../../factory/makeCreateJob'
 import db from '../../../../config/database/knex/connection'
 import { makePublishJob } from '../../factory/makePublishJob'
 import { makeUpdateJob } from '../../factory/makeUpdateJob'
+import { makeDeleteJob } from '../../factory/makeDeleteJob'
 
 const jobRoutes = Router()
 
@@ -41,5 +42,19 @@ jobRoutes.put(
     }
   }
 )
+
+jobRoutes.delete(
+  '/:id',
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await makeDeleteJob(req.params.id, db)
+
+      return res.status(200).send()
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
 
 export { jobRoutes }
