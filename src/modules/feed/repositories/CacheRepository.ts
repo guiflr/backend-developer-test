@@ -1,5 +1,5 @@
-import { FeedData } from "../../jobs/domain/types";
+import { FeedData } from "../domain/types";
 
 export interface CacheRepository {
-    update(data: FeedData): Promise<void>
+    update(data: FeedData[]): Promise<void>
 }
