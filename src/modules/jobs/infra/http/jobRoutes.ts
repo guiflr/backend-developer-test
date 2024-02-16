@@ -10,9 +10,9 @@ const jobRoutes = Router()
 
 jobRoutes.post('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await makeCreateJob(req.body, db)
+    const job = await makeCreateJob(req.body, db)
 
-    return res.status(201).send()
+    return res.status(201).send(job)
   } catch (err) {
     next(err)
   }
