@@ -99,6 +99,9 @@ export class UpdateJobValidatorTest implements UpdateJobValidator {
 }
 
 export class CacheRepositoryTest implements CacheRepository {
+  async get(): Promise<FeedData[]> {
+    return [feedData]
+  }
   async update (data: FeedData[]): Promise<void> {}
 }
 
