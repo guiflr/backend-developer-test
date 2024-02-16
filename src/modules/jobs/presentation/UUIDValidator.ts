@@ -6,5 +6,5 @@ export type JobValidatorResponse = {
 }
 
 export interface UUIDValidator {
-  validate(id: string): JobValidatorResponse
+  validate(data: any): JobValidatorResponse
 }

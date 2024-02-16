@@ -8,7 +8,7 @@ import { JobRepository } from '../repositories/JobRepository'
 export class UpdateJobService implements UpdateJob {
   constructor (private updateJobValidator: UpdateJobValidator, private uuidValidation: UUIDValidator, private jobRepository: JobRepository) {}
   async update (data: UpdateJobData, id: string): Promise<void> {
-    const validation = this.updateJobValidator.validator(data)
+    const validation = this.updateJobValidator.validate(data)
     
     if(!validation.isValid){
       throw invalidRequest(validation.error)
