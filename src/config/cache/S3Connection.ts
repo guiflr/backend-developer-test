@@ -9,8 +9,8 @@ class S3Connection {
     return new S3Client({
       region,
       credentials: {
-        accessKeyId: 'AKIA2V6MVNXKSTHQU5YD',
-        secretAccessKey: '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'
+        accessKeyId,
+        secretAccessKey
       }
     })
   }
