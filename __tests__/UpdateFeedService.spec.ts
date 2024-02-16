@@ -1,7 +1,7 @@
 import { UpdateFeedService } from '../src/modules/feed/services/UpdateFeedService'
 import { CacheRepositoryTest, FeedRepositoryTest, feedData } from './factory'
 
-describe('UpdateCachePublishedJobsService', () => {
+describe('UpdateFeedService.spec', () => {
   const feedRepository = new FeedRepositoryTest()
   const cacheRepository = new CacheRepositoryTest()
 
@@ -10,19 +10,19 @@ describe('UpdateCachePublishedJobsService', () => {
     cacheRepository
   )
 
-  test('Should call job repository', async () => {
-    const jobRepositorySpy = jest.spyOn(feedRepository, 'getByStatus')
+  test('Should call feed repository', async () => {
+    const feedRepositorySpy = jest.spyOn(feedRepository, 'getByStatus')
 
     await updateFeedService.update()
 
-    expect(jobRepositorySpy).toHaveBeenCalledWith('published')
+    expect(feedRepositorySpy).toHaveBeenCalledWith('published')
   })
 
-  test('Should call job repository', async () => {
+  test('Should call cache repository', async () => {
     const cacheRepositorySpy = jest.spyOn(cacheRepository, 'update')
 
     await updateFeedService.update()
 
-    expect(cacheRepositorySpy).toHaveBeenCalledWith(feedData)
+    expect(cacheRepositorySpy).toHaveBeenCalledWith([feedData])
   })
 })
