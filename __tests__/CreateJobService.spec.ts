@@ -78,4 +78,10 @@ describe('CreateJobService', () => {
       status: 400
     })
   })
+
+  test('Should return created job', async () => {
+    const job = await createJobService.create(jobData)
+
+    expect(job).toHaveProperty('id')
+  })
 })

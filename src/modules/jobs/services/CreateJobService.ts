@@ -13,7 +13,7 @@ export class CreateJobService implements CreateJob {
     private jobRepository: JobRepository
   ) {}
 
-  async create (job: JobCreate): Promise<void> {
+  async create (job: JobCreate): Promise<JobDTO> {
     const validate = this.jobValidator.validate(job)
 
     if (!validate.isValid) {
@@ -30,6 +30,8 @@ export class CreateJobService implements CreateJob {
       throw notFound('company not found')
     }
 
-    await this.jobRepository.store(job)
+    const createdJob = await this.jobRepository.store(job)
+
+    return createdJob
   }
 }
