@@ -1,19 +1,10 @@
-import { getZodErrors } from '../../../shared/getZodErrors'
+import { JobValidatorAbstract } from '../abstract/JobValidatorAbstract'
 import { UUIDValidatorSchema } from '../helpers/UUIDValidator'
-import { JobValidatorResponse, UUIDValidator } from '../presentation/UUIDValidator'
 
-export class ZodUUIDValidator implements UUIDValidator {
-  validate (id: string): JobValidatorResponse {
-    const validation = UUIDValidatorSchema.safeParse(id)
+export class ZodUUIDValidator extends JobValidatorAbstract {
+  schema(data: any): { success: boolean; error: any } {
+    const schema =  UUIDValidatorSchema.safeParse(data)
 
-    if (validation.success) {
-      return { error: '', isValid: true }
-    }
-
-    const error = JSON.stringify(validation.error)
-
-    const errors = getZodErrors(error)
-
-    return { isValid: false, error: errors }
+    return { error: schema.success ? null : schema.error, success: schema.success }
   }
 }

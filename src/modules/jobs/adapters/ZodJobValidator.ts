@@ -1,23 +1,10 @@
-import { getZodErrors } from '../../../shared/getZodErrors'
-import { JobCreate } from '../domain/types'
+import { JobValidatorAbstract } from '../abstract/JobValidatorAbstract';
 import { JobValidatorSchema } from '../helpers/JobValidatorSchema'
-import {
-  JobValidator,
-  JobValidatorResponse
-} from '../presentation/JobValidator'
 
-export class ZodJobValidator implements JobValidator {
-  validate (job: JobCreate): JobValidatorResponse {
-    const validation = JobValidatorSchema.safeParse(job)
+export class ZodJobValidator extends JobValidatorAbstract {
+  schema(data: any): { success: boolean; error: any } {
+    const schema =  JobValidatorSchema.safeParse(data)
 
-    if (validation.success) {
-      return { error: '', isValid: true }
-    }
-
-    const error = JSON.stringify(validation.error)
-
-    const errors = getZodErrors(error)
-
-    return { isValid: false, error: errors }
+    return { error: schema.success ? null : schema.error, success: schema.success }
   }
 }
