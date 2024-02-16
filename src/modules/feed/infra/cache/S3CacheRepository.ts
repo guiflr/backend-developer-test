@@ -30,8 +30,8 @@ export class S3CacheRepository implements CacheRepository {
   async update (data: FeedData[]): Promise<void> {
     const body = JSON.stringify(data)
     const command = new PutObjectCommand({
-      Bucket: 'feed-content-serve',
-      Key: 'feed.json',
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: process.env.AWS_BUCKET_KEY,
       Body: body
     })
 
