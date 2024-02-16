@@ -13,6 +13,8 @@ export class KnexFeedRepository implements FeedRepository {
         created_at: 'jobs.created_at',
         company: 'companies.name'
       })
+      .orderBy('jobs.created_at', 'desc')
+      .where('jobs.status', '=', status)
       .innerJoin('companies', 'companies.id', 'jobs.company_id')
 
     return feed
