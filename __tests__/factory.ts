@@ -93,9 +93,9 @@ export class UUIDValidatorTest implements UUIDValidator {
 }
 
 export class UpdateJobValidatorTest implements UpdateJobValidator {
-  validator (data: UpdateJobData): JobValidatorResponse {
+  validate(data: any): JobValidatorResponse {
     return { error: null, isValid: true }
-  }
+  } 
 }
 
 export class CacheRepositoryTest implements CacheRepository {
