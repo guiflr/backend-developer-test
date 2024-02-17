@@ -34,10 +34,10 @@ export const updateJobData: UpdateJobData = {
 }
 
 export class CompanyRepositoryTest implements CompanyRepository {
-  async get (id: string): Promise<CompanyDTO> {
+  async get(id: string): Promise<CompanyDTO> {
     return companyData
   }
-  async getAll (): Promise<CompanyDTO[]> {
+  async getAll(): Promise<CompanyDTO[]> {
     return [companyData]
   }
 }
@@ -51,7 +51,7 @@ export const jobData: JobCreate = {
 }
 
 export class JobValidatorTest implements JobValidator {
-  validate (job: JobCreate): JobValidatorResponse {
+  validate(job: JobCreate): JobValidatorResponse {
     return { isValid: true, error: '' }
   }
 }
@@ -65,29 +65,29 @@ export const feedData: FeedData = {
 }
 
 export class JobRepositoryTest implements JobRepository {
-  async delete (id: string): Promise<void> {}
-  async update (data: UpdateJobData, id: string): Promise<void> {}
-  async updateStatus (status: Status): Promise<void> {}
-  async get (id: string): Promise<JobDTO> {
+  async updateStatus(data: { status: Status; notes?: string | undefined }, id: string): Promise<void> {}
+  async delete(id: string): Promise<void> { }
+  async update(data: UpdateJobData, id: string): Promise<void> { }
+  async get(id: string): Promise<JobDTO> {
     return { id: 'id', ...jobData }
   }
-  async store (job: JobCreate): Promise<JobDTO> {
+  async store(job: JobCreate): Promise<JobDTO> {
     return { id: 'id', ...jobData }
   }
 }
 
 export class JobQueueTest implements JobQueue {
-  async store (job: JobCreate): Promise<void> {}
+  async store(job: JobCreate): Promise<void> { }
 }
 
 export class JobModeratorTest implements JobModerator {
-  async moderate (content: string): Promise<JobModerateResponse> {
+  async moderate(content: string): Promise<JobModerateResponse> {
     return { isHarmful: false }
   }
 }
 
 export class UUIDValidatorTest implements UUIDValidator {
-  validate (id: string): JobValidatorResponse {
+  validate(id: string): JobValidatorResponse {
     return { error: 'id error', isValid: true }
   }
 }
@@ -102,11 +102,11 @@ export class CacheRepositoryTest implements CacheRepository {
   async get(): Promise<FeedData[]> {
     return [feedData]
   }
-  async update (data: FeedData[]): Promise<void> {}
+  async update(data: FeedData[]): Promise<void> { }
 }
 
 export class FeedRepositoryTest implements FeedRepository {
-  async getByStatus (status: Status): Promise<FeedData[]> {
+  async getByStatus(status: Status): Promise<FeedData[]> {
     return [feedData]
   }
 }

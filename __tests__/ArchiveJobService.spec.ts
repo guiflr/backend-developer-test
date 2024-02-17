@@ -19,7 +19,7 @@ describe('ArchiveJobService', () => {
     const jobRepoSpy = jest.spyOn(jobRepository, 'updateStatus')
 
     await archiveJob.archive('id')
-    expect(jobRepoSpy).toHaveBeenCalledWith('archived','id')
+    expect(jobRepoSpy).toHaveBeenCalledWith({status: 'archived'},'id')
   })
 
 })

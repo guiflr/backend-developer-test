@@ -28,7 +28,7 @@ describe('ReadJobService', () => {
 
     await readJobService.read({ ...jobData, id})
 
-    expect(jobRepoSpy).toHaveBeenCalledWith('rejected', id)
+    expect(jobRepoSpy).toHaveBeenCalledWith({status: 'rejected', notes: note}, id)
   })
 
   test('Should call JobRepository with correct values when moderate return false', async () => {
@@ -38,6 +38,6 @@ describe('ReadJobService', () => {
 
     await readJobService.read({ ...jobData, id })
 
-    expect(jobRepoSpy).toHaveBeenCalledWith('published', id)
+    expect(jobRepoSpy).toHaveBeenCalledWith({status: 'published'}, id)
   })
 })

@@ -15,6 +15,6 @@ export class ArchiveJobService implements ArchiveJob {
       throw invalidRequest('invalid job id')
     }
 
-    await this.jobRepository.updateStatus('archived', id)
+    await this.jobRepository.updateStatus({status: 'archived'}, id)
   }
 }

@@ -4,8 +4,8 @@ import { JobModerator } from '../presentation/JobModerator'
 import { JobRepository } from '../repositories/JobRepository'
 
 export class ReadJobService implements ReadJob {
-  constructor (private jobModerator: JobModerator, private jobRepository: JobRepository) {}
-  async read (jobData: JobDTO): Promise<void> {
+  constructor(private jobModerator: JobModerator, private jobRepository: JobRepository) { }
+  async read(jobData: JobDTO): Promise<void> {
     const moderate = await this.jobModerator.moderate(
       jobData.title,
       jobData.description
@@ -17,6 +17,8 @@ export class ReadJobService implements ReadJob {
 
     jobData.status = moderate.isHarmful ? 'rejected' : 'published'
 
-    await this.jobRepository.updateStatus(jobData.status, jobData.id)
+    const { status, notes } = jobData
+
+    await this.jobRepository.updateStatus({  status, notes  }, jobData.id)
   }
 }
