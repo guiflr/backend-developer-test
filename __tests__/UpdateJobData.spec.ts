@@ -10,7 +10,7 @@ describe('UpdateJobData', () => {
   const updateJob = new UpdateJobService(updateValidator, uuidValidator, jobRepository)
 
   test('Should call update job validator', async () => {
-    const updateValidatorSpy = jest.spyOn(updateValidator, 'validate')
+    const updateValidatorSpy = jest.spyOn(updateValidator, 'validator')
 
     await updateJob.update(updateJobData, 'id')
     expect(updateValidatorSpy).toHaveBeenCalledWith(updateJobData)
@@ -18,7 +18,7 @@ describe('UpdateJobData', () => {
 
   test('Should throw an error if update data is invalid', async () => {
     const error = 'fail'
-    jest.spyOn(updateValidator, 'validate').mockReturnValueOnce({ error, isValid: false })
+    jest.spyOn(updateValidator, 'validator').mockReturnValueOnce({ error, isValid: false })
 
     await expect(() => updateJob.update(updateJobData, 'id')).rejects.toEqual(invalidRequest(error))
   })
