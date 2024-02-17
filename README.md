@@ -19,3 +19,7 @@
 ## **Documentation:**
 
 - **API Documentation:** https://documenter.getpostman.com/view/3980071/2sA2r7zNaT
+
+## **Bonus Questions**
+
+- A possibility to solve job moderation feature under high load conditions is controlling the messages on queue, scheduling messages to read them in a space of the time, so the application wouldn't go reach over the requests limit on moderation client and the database client connect won't get timeout because of high load conditions.
