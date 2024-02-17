@@ -12,14 +12,16 @@
 
 4. **tests**: Use `npm run test` to run tests, this project will run only unit tests, but exist integration tests implementd, however integration tests enviroment is not so good for that, then I would need to enhance this enviroment.
 
+5. **deploy:** Use `npx serverless`
+
 ## Online APP
 
 - **API:** This app is online on `https://wso3gn93sb.execute-api.us-east-1.amazonaws.com/`, test all business rules there
 
-## **Documentation:**
+## Documentation
 
 - **API Documentation:** https://documenter.getpostman.com/view/3980071/2sA2r7zNaT
 
-## **Bonus Questions**
+## Bonus Questions
 
 - A possibility to solve job moderation feature under high load conditions is controlling the messages on queue, scheduling messages to read them in a space of the time, so the application wouldn't go reach over the requests limit on moderation client and the database client connect won't get timeout because of high load conditions.
